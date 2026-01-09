@@ -16,7 +16,27 @@ const updateProgress = (checkCompletion = true) => {
     Confetti();
   }
 };
+// --- LOGIC DARK MODE ---
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme === "dark") {
+  body.classList.add("dark-mode");
+  themeToggle.textContent = "☀️"; 
+}
+
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  if (body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+});
 function addTask() {
   if (inputBox.value === "") {
     alert("Vui lòng nhập Task!");
@@ -38,6 +58,11 @@ function addTask() {
   inputBox.value = "";
   saveData();
 }
+inputBox.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
+});
 listContainer.addEventListener(
   "click",
   function (e) {

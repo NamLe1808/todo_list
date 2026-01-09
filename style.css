@@ -1,33 +1,109 @@
+:root {
+  /* Màu Sáng (Mặc định) */
+  --bg-gradient: linear-gradient(135deg, rgb(4, 138, 91), #ec71cd);
+  --app-bg: #fff;
+  --text-color: #000;
+  --input-bg: #f1f1f1;
+  --input-text: #000;
+  --placeholder-color: #555;
+  --item-hover: #edeef0;
+  --btn-bg: #eaefff;
+}
+
+/* Định nghĩa màu cho chế độ Tối */
+.dark-mode {
+  --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --app-bg: #2d3436;
+  --text-color: #dfe6e9;
+  --input-bg: #4b4b4b;
+  --input-text: #fff;
+  --placeholder-color: #b2bec3;
+  --item-hover: #636e72;
+  --btn-bg: #636e72;
+  ul li::before {
+    filter: invert(1);
+  }
+  color-scheme: dark;
+}
+
+.dark-mode ul li span {
+  background: #636e72;
+  color: #fff;
+
+  /* Tạo hiệu ứng nổi 3D */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+  inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.dark-mode ul li span:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode ul li span:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
 * {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
+
 .container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, rgb(4, 138, 91), #ec71cd);
+  background: var(--bg-gradient); /* Dùng biến */
   padding: 10px;
+  transition: background 0.3s;
 }
+
 .todo-app {
   width: 100%;
   max-width: 600px;
-  background: #fff;
+  background: var(--app-bg); /* Dùng biến */
   margin: 100px auto 20px;
   padding: 20px 30px 70px;
   border-radius: 10px;
+  transition: background 0.3s, color 0.3s;
 }
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .todo-app h2 {
   color: #3d60eb;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
+
 .todo-app h2 img {
   width: 30px;
   margin-left: 10px;
 }
+
+/* Nút chuyển đổi giao diện */
+.btn-toggle {
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .stat-container {
   padding: 15px 20px;
   border-radius: 10px;
@@ -38,22 +114,27 @@
   gap: 20px;
   width: 100%;
   margin-bottom: 20px;
+  background: var(--app-bg); /* Dùng biến */
 }
+
 .row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f1f1f1;
+  background: var(--input-bg); /* Dùng biến */
   border-radius: 30px;
   padding-left: 30px;
   margin-bottom: 10px;
 }
+
 .details {
   width: 100%;
 }
+
 .details h3 {
-  color: #0d0b0b;
+  color: var(--text-color); /* Dùng biến */
 }
+
 #progressbar {
   width: 100%;
   height: 7px;
@@ -84,15 +165,23 @@
   font-size: 1.5rem;
   color: #3a05e7;
 }
+
 input {
   flex: 1;
   border: none;
   outline: none;
   background: transparent;
   padding: 14px;
-  font-weight: 16px;
+  font-size: 16px;
+  color: var(--input-text);
 }
-button {
+
+input::placeholder {
+  color: var(--placeholder-color);
+}
+
+button.add-btn {
+  /* Đổi tên class button thêm task để tránh trùng nút toggle */
   border: none;
   outline: none;
   padding: 14px 35px;
@@ -102,6 +191,7 @@ button {
   border-radius: 40px;
   cursor: pointer;
 }
+
 ul li {
   list-style: none;
   font-size: 17px;
@@ -109,7 +199,9 @@ ul li {
   user-select: none;
   cursor: pointer;
   position: relative;
+  color: var(--text-color); /* Dùng biến */
 }
+
 ul li::before {
   content: "";
   position: absolute;
@@ -122,13 +214,16 @@ ul li::before {
   top: 12px;
   left: 8px;
 }
+
 ul li.checked {
   text-decoration: line-through;
   color: #888;
 }
+
 ul li.checked::before {
   background-image: url(image/check.gif);
 }
+
 ul li span {
   position: absolute;
   right: 0;
@@ -140,14 +235,33 @@ ul li span {
   line-height: 40px;
   text-align: center;
   border-radius: 50px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+  inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
 }
+
 ul li span:hover {
-  background: #edeef0;
+  background: var(--item-hover); /* Dùng biến */
 }
+
 ul li span.edit {
   right: 50px;
 }
 
 ul li span.close {
   right: 0;
+}
+/* --- Fix lỗi ô input bị trắng khi browser tự điền (Autofill) --- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* Dùng shadow để đè màu nền mặc định của trình duyệt */
+  -webkit-box-shadow: 0 0 0 30px var(--input-bg) inset !important;
+
+  /* Chỉnh màu chữ */
+  -webkit-text-fill-color: var(--input-text) !important;
+  /* Giữ màu icon checkbox/toggle hợp lý */
+  transition: background-color 5000s ease-in-out 0s;
 }
