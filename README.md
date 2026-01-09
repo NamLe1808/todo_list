@@ -30,19 +30,13 @@ Dự án đã được tích hợp Docker để dễ dàng triển khai.
 1.  **Build Docker Image:**
 
     ```bash
-    docker build -t todo-app .
+    docker build -t todo-list .
     ```
 
 2.  **Run Container:**
     ```bash
-    docker run -d -p 80:80 todo-app
+    docker run -d -p 8080:80 todo-list
     ```
-    Sau đó truy cập `http://localhost` để trải nghiệm ứng dụng.
-
-## 📷 Screenshots
-
-_(Bạn có thể thêm ảnh chụp màn hình ứng dụng vào đây sau này)_
-
+    Sau đó truy cập `http://localhost:8080` để trải nghiệm ứng dụng.
 ## 👤 Author
-
 Developed by **NamLe1808**
